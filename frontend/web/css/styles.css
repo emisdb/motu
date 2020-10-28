@@ -1,0 +1,242 @@
+html,body {
+    height:98%;
+}
+body {
+    font-family: Arial;
+    font-size: 17px;
+    padding: 8px;
+    background: url(../images/header.jpg) no-repeat center top;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    flex-direction: row ;
+
+    /*
+    -ms-flex-wrap: wrap; !* IE10 *!
+    flex-wrap: wrap;
+    */
+    margin: 0 -16px;
+}
+.row-column, .row_column{
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-direction: column ;
+}
+.row-column label.row, .row_column label.row{
+    justify-content: flex-start;
+}
+
+.big {
+    margin-top: 3px;
+}
+.col-25, .col_25 {
+    -ms-flex: 25%; /* IE10 */
+    flex: 25%;
+}
+
+.col-50, .col_50 {
+    -ms-flex: 50%; /* IE10 */
+    flex: 50%;
+    flex-grow: 1;
+}
+
+.col-75, .col_75 {
+    -ms-flex: 75%; /* IE10 */
+    flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75,
+.col_25,
+.col_50,
+.col_75{
+    padding: 0 16px;
+}
+.col-sized, .col_sized{
+    flex-basis: 600px;
+}
+.container {
+    background-color: #f2f2f2;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    height: 100%;
+    opacity: .8;
+}
+.central{
+    text-align: center;
+}
+.central-map{
+    text-align: center;
+    margin: 5px auto -5px;
+    opacity: .9;
+}
+.central ul li{
+    text-align: left;
+    list-style: none;
+}
+.notes {
+    font-size: .8em;
+    font-style: oblique;
+}
+.container ol li{
+    margin:2px;
+
+}
+h4{
+    margin: 2px;
+}
+.mapsis
+{
+    height: 600px;
+    width: 800px;
+    /*position: absolute;*/
+    /*display:block;*/
+    /*margin: 5px 0;*/
+}
+
+.maxmapsis {
+    width: 100%;
+    height: 100%;
+}
+.header {
+    position: fixed;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-bottom: solid #757575 1px;
+    text-align: center;
+    box-shadow: #a2a2a2 2px 3px  5px;
+    display: flex;
+}
+.footer {
+    position: fixed;
+    overflow: hidden;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: solid #757575 1px;
+    text-align: center;
+    box-shadow: #a2a2a2 2px -3px 5px;
+}
+.footer h2, .header h2{
+    margin: 0 auto;
+    padding: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: #a2a2a2 2px 2px;
+}
+.footer a, .header a {
+    display: block;
+    color: #727272;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+.header div{
+    text-align: left;
+    padding: 4px 16px;
+    text-decoration: none;
+    font-size: 12pt;
+}
+.header div td:first-child{
+    padding-right: 4px;
+    font-weight: bold;
+}
+.header div td a{
+    padding: 4px;
+    text-align: left;
+}
+tr.odd{
+    background-color: rgba(240, 240, 190, 0.5);
+}
+tr.even{
+    background-color: rgba(240, 240, 190, 0.8);
+}
+tr.odd:hover, tr.even:hover{
+    background-color: rgba(240, 240, 190, 0.2);
+}
+.header div table{
+    background-color: rgba(240, 240, 190, 0.5);
+}
+.header div ul{
+    list-style: none;
+    margin: 4px;
+    /*opacity: 0;*/
+}
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 10px;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* The Close Button */
+.close {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Modal Header */
+.modal-header {
+    padding: 2px 6px;
+    background-color: #83cfff;
+    color: white;
+}
+
+/* Modal Body */
+.modal-body {padding: 2px 16px;}
+
+/* Modal Footer */
+.modal-footer {
+    padding: 2px 6px;
+    background-color: #83cfff;
+    color: white;
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 4px;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.5s
+}
+
+/* Add Animation */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0px; opacity: 1}
+}
+
