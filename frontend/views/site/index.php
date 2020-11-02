@@ -1,21 +1,17 @@
 <?php
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+//$this->title = 'My Yii Application';
+
 ?>
-<div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Hello!</h1>
-
-        <p class="lead">Here is initial Motu page.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+    <div class="central-map maxmapsis growUp" id="map">
     </div>
+<?php
+    $this->registerJsFile('/js/motu/app.js',[$this::POS_END]);
+	$this->registerJsFile('/js/motu/modal.js',[$this::POS_END]);
+	$this->registerJsFile('/js/motu/index.js',[$this::POS_END]);
+?>
 
-    <div class="body-content">
-
- 
-    </div>
-</div>

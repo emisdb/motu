@@ -23,6 +23,7 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
+
     public function behaviors()
     {
         return [
@@ -74,6 +75,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+    	$this->layout="motu";
+		Yii::$app->view->title= 'MOTU frontend';
         return $this->render('index');
     }
 

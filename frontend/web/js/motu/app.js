@@ -21,17 +21,23 @@ class App {
             let plm =new ymaps.Placemark(
                 [this.hotels[i].longtitude ,this.hotels[i].latitude],
                 {
-                balloonContent: name,
-                iconContent: label,
+                    balloonContent: name,
+                    iconContent: label,
                 },
                 {
-                preset: "twirl#darkblueIcon",
+                    preset: "twirl#darkblueIcon",
+                    inx: i,
             });
+            plm.events.add('balloonopen', function (e) {
+                let res=document.querySelector("#myResult");
+                var target = e.get('target');
+                let inx = target.options.get('inx');
+                res.innerHTML = this.hotels[inx].name;
+            }.bind(this));
             this.hotels[i].mark =plm;
             this.map.geoObjects.add(plm);
         }
         mm.innerHTML = list + "</table>";
-
     }
     omover(tr){
         let e=document.querySelector("#myResult");

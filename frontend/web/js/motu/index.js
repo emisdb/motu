@@ -1,41 +1,19 @@
-// Get the modal
-var modal = document.getElementById("myModal");
+const app = new App(document.getElementById("map"));
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+ymaps.ready(map_init);
+function map_init() {
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-function emptyLi(ii){
-    var retval ="";
-    for (i=0;i<ii;i++){
-        retval += "<li>null</li>";
-    }
-    return retval;
+    var map = document.getElementById("map");
+    map.addEventListener("animationend", ()=>{
+        app.setMap(ymaps);
+        app.map.container.fitToViewport();
+        app.setHotels([
+                {name:'Solo Sokos Palace Bridge',       latitude:59.945013, longtitude:30.292790, stars:5},
+                {name:'МФК «Горный»',                   latitude:59.941759, longtitude:30.230429, stars:4},
+                {name:'Solo Sokos Hotel Vasilievsky',   latitude:59.937301, longtitude:30.282406, stars:5},
+                {name:'Art Nuvo Palace',                latitude:59.945612, longtitude:30.258124, stars:4},
+                {name:'Courtyard by Marriott',          latitude:59.948717, longtitude:30.279405, stars:5},
+                {name:'Докланс Лайф',                   latitude:59.956985, longtitude:30.241910, stars:3},
+            ]
+        );           });
 }
-btn.onclick = function() {
-    var prev =0;
-    var mycontent = '<ol start="1">' + '<li>mem</li> '+ '</ol>';
-    var myplace = document.getElementById("myModalContent");
-    myplace.innerHTML =mycontent;
-    var myplace = document.getElementById("myModalFooter");
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function(){
-
-});
