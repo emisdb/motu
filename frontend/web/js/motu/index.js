@@ -7,7 +7,7 @@ function map_init() {
     map.addEventListener("animationend", ()=>{
         app.setMap(ymaps);
         app.map.container.fitToViewport();
-        app.setHotels([
+        app.setSites([
                 {name:'Solo Sokos Palace Bridge',       latitude:59.945013, longtitude:30.292790, stars:5},
                 {name:'МФК «Горный»',                   latitude:59.941759, longtitude:30.230429, stars:4},
                 {name:'Solo Sokos Hotel Vasilievsky',   latitude:59.937301, longtitude:30.282406, stars:5},

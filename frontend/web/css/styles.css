@@ -116,7 +116,7 @@ h4{
 }
 .header {
     position: fixed;
-    overflow: hidden;
+    /*overflow: hidden;*/
     left: 0;
     top: 0;
     width: 100%;
@@ -244,3 +244,47 @@ tr.odd:hover, tr.even:hover{
     to {top: 0px; opacity: 1}
 }
 
+#myTopnav  {
+    display: flex;
+}
+
+#myTopnav div {
+    position: absolute;
+    top: -250px;
+    transition: 0.3s;
+    padding: 15px;
+    width: 200px;
+    height:300px;
+    text-decoration: none;
+    color: white;
+    border-radius: 0 0 5px 5px;
+    font-size: .9em;
+    font-weight: bold;
+    vertical-align: bottom;
+    display: flex;
+}
+#myTopnav div span{
+    align-self: flex-end;
+}
+#myTopnav div:hover {
+    top: 0;
+}
+#visited {
+    background-color: #4CAF50;
+    left:10px;
+}
+
+#selected {
+    background-color: #2196F3;
+    left:220px;
+}
+
+#filters {
+    background-color: #f44336;
+    left:430px;
+}
+
+#categories {
+    background-color: #555;
+    left:640px;
+}

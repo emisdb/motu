@@ -47,8 +47,21 @@ AppAsset::register($this);
     </div>
  			<?= $content ?>
     <div class="header fadeInDown">
-        <div id="myMenu" >ПЛАТФОРМА #MOTU</div> <div id="myResult"></div>
-    </div>
+        <div id="myTopnav" class="topnav">
+            <div href="#" id="visited">
+                <span>Visited</span>
+            </div>
+            <div href="#" id="selected">
+                <span>Selected</span>
+            </div>
+            <div href="#" id="filters">
+                <span>Filters</span>
+            </div>
+            <div href="#" id="categories">
+                <span>Categories</span>
+            </div>
+        </div>
+   </div>
     <div class="footer fadeInUp">
         <h2><a href="#" id="myBtn" >ПЛАТФОРМА #MOTU</a></h2>
     </div>
