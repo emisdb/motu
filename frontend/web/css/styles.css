@@ -124,9 +124,8 @@ h4{
     text-align: center;
     box-shadow: #a2a2a2 2px 3px  5px;
     display: flex;
-    transition: 0.3s;
 }
-.footer {
+.footer-motu {
     position: fixed;
     /*overflow: hidden;*/
     left: 0;
@@ -135,16 +134,19 @@ h4{
     border-top: solid #757575 1px;
     text-align: center;
     box-shadow: #a2a2a2 2px -3px 5px;
+    transform:translateY(80%);
+    padding: 5px;
+    transition: transform 0.6s;
 }
 
-.footer h2, .header h2{
+.footer-motu h2, .footer-motu h2{
     margin: 0 auto;
     padding: 10px 0;
     text-align: center;
     text-transform: uppercase;
     text-shadow: #a2a2a2 2px 2px;
 }
-.footer a, .header a {
+.footer-motu a, .footer-motu a {
     display: block;
     color: #727272;
     text-align: center;
@@ -152,6 +154,11 @@ h4{
     text-decoration: none;
     font-size: 17px;
 }
+.footer-motu:hover {
+    transform:translateY(0);
+    /*height:auto;*/
+}
+
 .header div{
     text-align: left;
     padding: 4px 16px;
@@ -238,9 +245,6 @@ tr.odd:hover, tr.even:hover{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     animation-name: animatetop;
     animation-duration: 0.5s
-}
-.footer:hover {
-    height:auto;
 }
 /* Add Animation */
 @keyframes animatetop {

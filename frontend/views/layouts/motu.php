@@ -65,7 +65,7 @@ AppAsset::register($this);
         </div>
         <h2><a href="#" id="myBtn" >ПЛАТФОРМА #MOTU</a></h2>
    </div>
-    <div class="footer fadeInUp">
+    <div class="footer-motu fadeInUp">
         <!-- Flickity HTML init -->
         <div class="gallery js-flickity"
              data-flickity-options='{ "wrapAround": true }'>
