@@ -124,10 +124,11 @@ h4{
     text-align: center;
     box-shadow: #a2a2a2 2px 3px  5px;
     display: flex;
+    transition: 0.3s;
 }
 .footer {
     position: fixed;
-    overflow: hidden;
+    /*overflow: hidden;*/
     left: 0;
     bottom: 0;
     width: 100%;
@@ -135,6 +136,7 @@ h4{
     text-align: center;
     box-shadow: #a2a2a2 2px -3px 5px;
 }
+
 .footer h2, .header h2{
     margin: 0 auto;
     padding: 10px 0;
@@ -237,7 +239,9 @@ tr.odd:hover, tr.even:hover{
     animation-name: animatetop;
     animation-duration: 0.5s
 }
-
+.footer:hover {
+    height:auto;
+}
 /* Add Animation */
 @keyframes animatetop {
     from {top: -300px; opacity: 0}
@@ -287,4 +291,25 @@ tr.odd:hover, tr.even:hover{
 #categories {
     background-color: #555;
     left:640px;
+}
+.gallery {
+    background: #EEE;
+}
+
+.gallery-cell {
+    width: 20%;
+    height: 150px;
+    margin-right: 10px;
+    background: #8C8;
+    counter-increment: gallery-cell;
+}
+
+/* cell number */
+.gallery-cell:before {
+    display: block;
+    text-align: center;
+    content: counter(gallery-cell);
+    line-height: 200px;
+    font-size: 80px;
+    color: white;
 }

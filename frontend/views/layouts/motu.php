@@ -21,9 +21,11 @@ AppAsset::register($this);
     <link rel="stylesheet" href="css/animation.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <!--        <script src="https://api-maps.yandex.ru/2.1/?apikey=e46c6ff8-eed4-4d0a-ad07-ae2f1173c5f9&lang=ru_RU" type="text/javascript">-->
     <script src="https://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU&coordorder=longlat"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.pkgd.js"></script>
 	<?php $this->head() ?>
 </head>
     <body>
@@ -61,9 +63,18 @@ AppAsset::register($this);
                 <span>Categories</span>
             </div>
         </div>
+        <h2><a href="#" id="myBtn" >ПЛАТФОРМА #MOTU</a></h2>
    </div>
     <div class="footer fadeInUp">
-        <h2><a href="#" id="myBtn" >ПЛАТФОРМА #MOTU</a></h2>
+        <!-- Flickity HTML init -->
+        <div class="gallery js-flickity"
+             data-flickity-options='{ "wrapAround": true }'>
+            <div class="gallery-cell"></div>
+            <div class="gallery-cell"></div>
+            <div class="gallery-cell"></div>
+            <div class="gallery-cell"></div>
+            <div class="gallery-cell"></div>
+        </div>
     </div>
 	<?php $this->endBody() ?>
     </body>
