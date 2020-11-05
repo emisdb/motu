@@ -48,24 +48,31 @@ AppAsset::register($this);
 
     </div>
  			<?= $content ?>
-    <div class="header fadeInDown">
+    <div id="sidebar" class="sidebar_motu slideInLeft">
+        <div style="width:100px;background-color: #0a73bb;align-self: center;vertical-align: center;"></div>
+    </div>
+        <div class="header fadeInDown">
         <div id="myTopnav" class="topnav">
             <div href="#" id="visited">
-                <span>Visited</span>
+                <div></div>
+                <div>Visited</div>
             </div>
             <div href="#" id="selected">
-                <span>Selected</span>
-            </div>
+                <div></div>
+                <div>Selected</div>
+           </div>
             <div href="#" id="filters">
-                <span>Filters</span>
+                <div></div>
+                <div>Filters</div>
             </div>
             <div href="#" id="categories">
-                <span>Categories</span>
+                <div></div>
+                <div>Categories</div>
             </div>
         </div>
         <h2><a href="#" id="myBtn" >ПЛАТФОРМА #MOTU</a></h2>
    </div>
-    <div class="footer-motu fadeInUp">
+    <div class="footer_motu fadeInUp">
         <!-- Flickity HTML init -->
         <div class="gallery js-flickity"
              data-flickity-options='{ "wrapAround": true }'>

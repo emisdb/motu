@@ -28,7 +28,7 @@ class App {
                     inx: i,
                 });
             plm.events.add('balloonopen', function (e) {
-                let res=document.querySelector("#myResult");
+                let res=document.querySelector("#visited div:last-child");
                 var target = e.get('target');
                 let inx = target.options.get('inx');
                 res.innerHTML = this.hotels[inx].name;
@@ -38,11 +38,30 @@ class App {
         }
         mm.innerHTML = list + "</table>";
     }
+    pt_details(i){
+        let res=document.querySelector("#sidebar div:first-child");
+        res.innerHTML = app.sites[i].name;
+        let bar=document.querySelector("#sidebar")
+        const mouseoverEvent = new Event('mouseenter');
+       bar.dispatchEvent(mouseoverEvent);
+    }
+    pt_select(i){
+        let res=document.querySelector("#selected div:last-child");
+        res.innerHTML = app.sites[i].name;
+    }
+    baloon_content(i){
+        var content = '<div class="baloon">';
+        content += "<h2>" + this.sites[i].name + "</h2>";
+        content += '<div style="height:80px; border: solid 1px;">IMAGE</div>';
+        content += '<div><a onclick="app.pt_details('+ i +')" href="#">Details</a></div>';
+        content += '<div><a onclick="app.pt_select('+ i +')" href="#">Select</a></div>';
+        return content += '</div>';
+    }
     setSites(sites){
         this.sites =sites;
         for (var i=0; i<this.sites.length; i++) {
             const label = this.sites[i].name.slice(0,2);
-            const name = this.sites[i].name;
+            const name = this.baloon_content(i);
             let plm =new ymaps.Placemark(
                 [this.sites[i].longtitude ,this.sites[i].latitude],
                 {
@@ -54,7 +73,7 @@ class App {
                     inx: i,
             });
             plm.events.add('balloonopen', function (e) {
-                let res=document.querySelector("#myResult");
+                let res=document.querySelector("#visited div:last-child");
                 var target = e.get('target');
                 let inx = target.options.get('inx');
                 res.innerHTML = this.sites[inx].name;
