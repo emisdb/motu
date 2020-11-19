@@ -51,20 +51,22 @@ CREATE TABLE `providers`(
  	`category_id` int(11) NOT NULL,
 	`brand_name` varchar(50) not null,
 	`brand_name_en` varchar(50) not null,
-	`description` text,
+    `description` text,
+    `description_en` text,
+    `area` varchar(32),
 	`object_type` varchar(32) not null,
 	`short_description` varchar(32) not null,
 	`address` text not null, #Country, city, street, etc
 	`latitude` varchar(30),
 	`longitude` varchar(30),
 	`email` varchar(50),
-	`phone` varchar(20),
+	`phone` varchar(50),
 	`web_url` varchar(250),
 	`created_at` datetime default now(),
 	`updated_at` datetime on update now()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-- --------------------------------------------------------
+ --------------------------------------------------------
 
 --
 -- Структура таблицы `constants`
@@ -195,7 +197,9 @@ ALTER TABLE `category`
 -- Индексы таблицы `providers`
 --
 ALTER TABLE `providers`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `latitude` (`latitude`),
+  ADD KEY `longitude` (`longitude`);
 --
 --
 -- Индексы таблицы `constants`
