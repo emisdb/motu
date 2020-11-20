@@ -10,6 +10,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\Constants;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -76,8 +77,10 @@ class SiteController extends Controller
     public function actionIndex()
     {
     	$this->layout="motu";
+		$center[] = Constants::get('center.longitude');
+		$center[] = Constants::get('center.latitude');
 		Yii::$app->view->title= 'MOTU frontend';
-        return $this->render('index');
+        return $this->render('index', ['center' => $center]);
     }
 
     /**

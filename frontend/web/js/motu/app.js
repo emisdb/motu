@@ -4,7 +4,8 @@ class App {
     }
      setMap(ymaps){
         this.map = new ymaps.Map(this.map_container, {
-            center: [30.25, 59.943],
+//            center: [30.25, 59.943],
+            center: center_coors,
             zoom: 14
         });
         this.map.controls.add('zoomControl', {right: '5px', bottom: '50px'});
@@ -18,7 +19,7 @@ class App {
             const name = this.hotels[i].name;
             list += "<tr class='" + (i%2?"odd":"even")+ "' onmouseover='app.omover(this)' onmouseout='app.omout(this)' ><td>" + label + "</td><td><a href='#'>" + name + "</a></td></tr>";
             let plm =new ymaps.Placemark(
-                [this.hotels[i].longtitude ,this.hotels[i].latitude],
+                [this.hotels[i].longitude ,this.hotels[i].latitude],
                 {
                     balloonContent: name,
                     iconContent: label,
@@ -36,6 +37,7 @@ class App {
             this.hotels[i].mark =plm;
             this.map.geoObjects.add(plm);
         }
+
         mm.innerHTML = list + "</table>";
     }
     pt_details(i){
@@ -63,7 +65,7 @@ class App {
             const label = this.sites[i].name.slice(0,2);
             const name = this.baloon_content(i);
             let plm =new ymaps.Placemark(
-                [this.sites[i].longtitude ,this.sites[i].latitude],
+                [this.sites[i].longitude ,this.sites[i].latitude],
                 {
                     balloonContent: name,
                     iconContent: label,
@@ -81,6 +83,29 @@ class App {
             this.sites[i].mark =plm;
             this.map.geoObjects.add(plm);
         }
+        let myPlacemarkWithContent = new ymaps.Placemark(center_coors, {
+            hintContent: 'Собственный значок метки с контентом',
+            balloonContent: 'А эта — новогодняя',
+            iconContent: 'Hotel'
+        }, {
+            // Опции.
+            // Необходимо указать данный тип макета.
+            iconLayout: 'default#imageWithContent',
+            // Своё изображение иконки метки.
+            iconImageHref: 'https://avatars.mds.yandex.net/get-tycoon/742106/2a0000016c4ccc1d3061105be09f87cc24d1/priority-headline-logo',
+            // Размеры метки.
+            iconImageSize: [48, 48],
+            // Смещение левого верхнего угла иконки относительно
+            // её "ножки" (точки привязки).
+            iconImageOffset: [0, 0],
+            // Смещение слоя с содержимым относительно слоя с картинкой.
+            iconContentOffset: [15, 15],
+            // Макет содержимого.
+            //           iconContentLayout: MyIconContentLayout
+        });
+
+        this.map.geoObjects.add(myPlacemarkWithContent);
+
     }
 
     omover(tr){

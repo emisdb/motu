@@ -73,7 +73,7 @@ CREATE TABLE `providers`(
 --
 
 CREATE TABLE `constants` (
-  `key` varchar(8) NOT NULL,
+  `key` varchar(16) NOT NULL,
   `value` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
