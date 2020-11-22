@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\Constants;
+use common\models\Providers;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -80,7 +81,9 @@ class SiteController extends Controller
 		$center[] = Constants::get('center.longitude');
 		$center[] = Constants::get('center.latitude');
 		Yii::$app->view->title= 'MOTU frontend';
-        return $this->render('index', ['center' => $center]);
+		$prov=new Providers();
+		$result=$prov->filterByCoors([$center[0]-0.029, $center[1]+0.013],[$center[0]+0.029, $center[1]-0.013]);
+        return $this->render('index', ['center' => $center,'result'=>$result]);
     }
 
     /**

@@ -102,4 +102,15 @@ class Providers extends \yii\db\ActiveRecord
     {
         return $this->hasMany(FilterProvider::className(), ['provider_id' => 'id']);
     }
+    public static function filterByCoors($topleft,$bottomright){
+    	return static::find()
+		->select('brand_name_en,category_id,latitude,longitude')
+		->where(['>=', 'latitude', $bottomright[1]])
+		->andWhere(['<=', 'latitude', $topleft[1]])
+		->andWhere(['>=', 'longitude', $topleft[0]])
+		->andWhere(['<=', 'longitude', $bottomright[0]])
+		->asArray(true)
+		->all();
+
+	}
 }

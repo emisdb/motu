@@ -6,7 +6,8 @@ class App {
         this.map = new ymaps.Map(this.map_container, {
 //            center: [30.25, 59.943],
             center: center_coors,
-            zoom: 14
+            zoom: 15,
+            controls: ['smallMapDefaultSet']
         });
         this.map.controls.add('zoomControl', {right: '5px', bottom: '50px'});
     }
@@ -42,18 +43,18 @@ class App {
     }
     pt_details(i){
         let res=document.querySelector("#sidebar div:first-child");
-        res.innerHTML = app.sites[i].name;
+        res.innerHTML = app.sites[i].brand_name_en;
         let bar=document.querySelector("#sidebar")
         const mouseoverEvent = new Event('mouseenter');
        bar.dispatchEvent(mouseoverEvent);
     }
     pt_select(i){
         let res=document.querySelector("#selected div:last-child");
-        res.innerHTML = app.sites[i].name;
+        res.innerHTML = app.sites[i].brand_name_en;
     }
     baloon_content(i){
         var content = '<div class="baloon">';
-        content += "<h2>" + this.sites[i].name + "</h2>";
+        content += "<h2>" + this.sites[i].brand_name_en + "</h2>";
         content += '<div style="height:80px; border: solid 1px;">IMAGE</div>';
         content += '<div><a onclick="app.pt_details('+ i +')" href="#">Details</a></div>';
         content += '<div><a onclick="app.pt_select('+ i +')" href="#">Select</a></div>';
@@ -62,8 +63,26 @@ class App {
     setSites(sites){
         this.sites =sites;
         for (var i=0; i<this.sites.length; i++) {
-            const label = this.sites[i].name.slice(0,2);
+            const label = this.sites[i].brand_name_en.slice(0,2);
             const name = this.baloon_content(i);
+            var mark_color = 'twirl#darkblueIcon';
+            switch (this.sites[i].category_id) {
+                case '1':
+                    mark_color = 'twirl#darkblueIcon';
+                    break;
+                case '2':
+                    mark_color = 'twirl#darkgreenIcon';
+                    break;
+                case '3':
+                    mark_color = 'twirl#darkorangeIcon';
+                    break;
+                case '4':
+                    mark_color = 'twirl#yellowIcon';
+                    break;
+                case '5':
+                    mark_color = 'twirl#greyIcon';
+                    break;
+            }
             let plm =new ymaps.Placemark(
                 [this.sites[i].longitude ,this.sites[i].latitude],
                 {
@@ -71,7 +90,7 @@ class App {
                     iconContent: label,
                 },
                 {
-                    preset: "twirl#darkblueIcon",
+                    preset: mark_color,
                     inx: i,
             });
             plm.events.add('balloonopen', function (e) {
@@ -84,24 +103,24 @@ class App {
             this.map.geoObjects.add(plm);
         }
         let myPlacemarkWithContent = new ymaps.Placemark(center_coors, {
-            hintContent: 'Собственный значок метки с контентом',
-            balloonContent: 'А эта — новогодняя',
-            iconContent: 'Hotel'
+            hintContent: 'Park Inn by Radisson Nevsky',
+            balloonContent: 'Park Inn by Radisson Nevsky',
+  //          iconContent: 'Hotel'
         }, {
             // Опции.
             // Необходимо указать данный тип макета.
             iconLayout: 'default#imageWithContent',
             // Своё изображение иконки метки.
-            iconImageHref: 'https://avatars.mds.yandex.net/get-tycoon/742106/2a0000016c4ccc1d3061105be09f87cc24d1/priority-headline-logo',
+            iconImageHref: 'https://avatars.mds.yandex.net/get-tycoon/1654178/9594_pin_bitmap_standard_2019-09-18T13_22_49/pin-desktop_x2',
             // Размеры метки.
-            iconImageSize: [48, 48],
+            iconImageSize: [60, 60],
             // Смещение левого верхнего угла иконки относительно
             // её "ножки" (точки привязки).
-            iconImageOffset: [0, 0],
+ //           iconImageOffset: [-20, -20],
             // Смещение слоя с содержимым относительно слоя с картинкой.
-            iconContentOffset: [15, 15],
+//            iconContentOffset: [15, 15],
             // Макет содержимого.
-            //           iconContentLayout: MyIconContentLayout
+//             iconContentLayout: MyIconContentLayout
         });
 
         this.map.geoObjects.add(myPlacemarkWithContent);
@@ -110,7 +129,7 @@ class App {
 
     omover(tr){
         let e=document.querySelector("#myResult");
-        e.innerHTML = this.hotels[tr.rowIndex].name;
+        e.innerHTML = this.hotels[tr.rowIndex].brand_name_en;
         var geoO=this.hotels[tr.rowIndex].mark;
 //        geoO.options.set("iconColor", 'ff66ff');
         geoO.options.set('preset', 'twirl#nightDotIcon');
