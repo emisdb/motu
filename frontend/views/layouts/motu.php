@@ -60,9 +60,10 @@ AppAsset::register($this);
         <div id="tc_whether"></div>
     </div>
     <div id="sidebar" class="sidebar_motu map_notes slideInLeft">
-        <img src="images/icons/motu_title_logo.svg" />
-        <img src="images/icons/motu_logo.svg" />
-        <img src="images/icons/motu_title.svg" />
+		<?=Html::a('<img src="images/icons/motu_title_logo.svg" />',['real']); ?>
+		<?=Html::a('<img src="images/icons/motu_logo.svg" />
+        <img src="images/icons/motu_title.svg" />',['index']); ?>
+
         <div style="width:100px;background-color: #0a73bb;align-self: center;vertical-align: center;"></div>
     </div>
 	<?php $this->endBody() ?>
