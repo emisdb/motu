@@ -60,7 +60,32 @@ class App {
         content += '<div><a onclick="app.pt_select('+ i +')" href="#">Select</a></div>';
         return content += '</div>';
     }
-    setSites(sites){
+    setCenter(center){
+        let myPlacemarkWithContent = new ymaps.Placemark(center, {
+            hintContent: 'Park Inn by Radisson Nevsky',
+            balloonContent: 'Park Inn by Radisson Nevsky',
+            //          iconContent: 'Hotel'
+        }, {
+            // Опции.
+            // Необходимо указать данный тип макета.
+            iconLayout: 'default#imageWithContent',
+            // Своё изображение иконки метки.
+            iconImageHref: 'https://avatars.mds.yandex.net/get-tycoon/1654178/9594_pin_bitmap_standard_2019-09-18T13_22_49/pin-desktop_x2',
+            // Размеры метки.
+            iconImageSize: [60, 60],
+            // Смещение левого верхнего угла иконки относительно
+            // её "ножки" (точки привязки).
+            //           iconImageOffset: [-20, -20],
+            // Смещение слоя с содержимым относительно слоя с картинкой.
+//            iconContentOffset: [15, 15],
+            // Макет содержимого.
+//             iconContentLayout: MyIconContentLayout
+        });
+
+        this.map.geoObjects.add(myPlacemarkWithContent);
+
+    }
+        setSites(sites){
         this.sites =sites;
         for (var i=0; i<this.sites.length; i++) {
             const label = this.sites[i].brand_name_en.slice(0,2);
@@ -102,28 +127,6 @@ class App {
             this.sites[i].mark =plm;
             this.map.geoObjects.add(plm);
         }
-        let myPlacemarkWithContent = new ymaps.Placemark(center_coors, {
-            hintContent: 'Park Inn by Radisson Nevsky',
-            balloonContent: 'Park Inn by Radisson Nevsky',
-  //          iconContent: 'Hotel'
-        }, {
-            // Опции.
-            // Необходимо указать данный тип макета.
-            iconLayout: 'default#imageWithContent',
-            // Своё изображение иконки метки.
-            iconImageHref: 'https://avatars.mds.yandex.net/get-tycoon/1654178/9594_pin_bitmap_standard_2019-09-18T13_22_49/pin-desktop_x2',
-            // Размеры метки.
-            iconImageSize: [60, 60],
-            // Смещение левого верхнего угла иконки относительно
-            // её "ножки" (точки привязки).
- //           iconImageOffset: [-20, -20],
-            // Смещение слоя с содержимым относительно слоя с картинкой.
-//            iconContentOffset: [15, 15],
-            // Макет содержимого.
-//             iconContentLayout: MyIconContentLayout
-        });
-
-        this.map.geoObjects.add(myPlacemarkWithContent);
 
     }
 

@@ -12,6 +12,7 @@ use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\Constants;
 use common\models\Providers;
+use common\models\Provider;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -70,21 +71,36 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-    	$this->layout="motu";
+	/**
+	 * Displays homepage.
+	 *
+	 * @return mixed
+	 */
+	public function actionReal()
+	{
+		$this->layout="motu";
 		$center[] = Constants::get('center.longitude');
 		$center[] = Constants::get('center.latitude');
 		Yii::$app->view->title= 'MOTU frontend';
 		$prov=new Providers();
 		$result=$prov->filterByCoors([$center[0]-0.029, $center[1]+0.013],[$center[0]+0.029, $center[1]-0.013]);
-        return $this->render('index', ['center' => $center,'result'=>$result]);
-    }
+		return $this->render('index', ['center' => $center,'result'=>$result]);
+	}
+	/**
+	 * Displays homepage.
+	 *
+	 * @return mixed
+	 */
+	public function actionIndex()
+	{
+		$this->layout="motu";
+		$center[] = Constants::get('center.longitude');
+		$center[] = Constants::get('center.latitude');
+		Yii::$app->view->title= 'MOTU frontend';
+		$prov=new Provider();
+		$result=$prov->filterByCoors([$center[0]-1.029, $center[1]+1.013],[$center[0]+1.029, $center[1]-1.013]);
+		return $this->render('index', ['center' => $center,'result'=>$result]);
+	}
 
     /**
      * Logs in a user.

@@ -48,40 +48,22 @@ AppAsset::register($this);
 
     </div>
  			<?= $content ?>
-    <div id="sidebar" class="sidebar_motu slideInLeft">
-        <div style="width:100px;background-color: #0a73bb;align-self: center;vertical-align: center;"></div>
+    <div id="title_center" class="map_notes">
+        <div id="tc_title">
+            Санкт - Петербург
+        </div>
+        <div id="tc_whether"></div>
     </div>
-        <div class="header fadeInDown">
-        <div id="myTopnav" class="topnav">
-            <div href="#" id="visited">
-                <div></div>
-                <div>Visited</div>
-            </div>
-            <div href="#" id="selected">
-                <div></div>
-                <div>Selected</div>
-           </div>
-            <div href="#" id="filters">
-                <div></div>
-                <div>Filters</div>
-            </div>
-            <div href="#" id="categories">
-                <div></div>
-                <div>Categories</div>
-            </div>
+    <div id="title_right" class="map_notes">
+        <div id="tc_title">
         </div>
-        <h2><a href="#" id="myBtn" >ПЛАТФОРМА #MOTU</a></h2>
-   </div>
-    <div class="footer_motu fadeInUp">
-        <!-- Flickity HTML init -->
-        <div class="gallery js-flickity"
-             data-flickity-options='{ "wrapAround": true }'>
-            <div class="gallery-cell"></div>
-            <div class="gallery-cell"></div>
-            <div class="gallery-cell"></div>
-            <div class="gallery-cell"></div>
-            <div class="gallery-cell"></div>
-        </div>
+        <div id="tc_whether"></div>
+    </div>
+    <div id="sidebar" class="sidebar_motu map_notes slideInLeft">
+        <img src="images/icons/motu_title_logo.svg" />
+        <img src="images/icons/motu_logo.svg" />
+        <img src="images/icons/motu_title.svg" />
+        <div style="width:100px;background-color: #0a73bb;align-self: center;vertical-align: center;"></div>
     </div>
 	<?php $this->endBody() ?>
     </body>

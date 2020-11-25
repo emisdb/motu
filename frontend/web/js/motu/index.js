@@ -16,6 +16,7 @@ function map_init() {
         //         {name:'Докланс Лайф',                   latitude:59.956985, longitude:30.241910, stars:3},
         //     ]
         // );
+        app.setCenter(center_coors);
         app.setSites(show_points);
     });
 }
