@@ -104,7 +104,18 @@ class Provider extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
-	public static function filterByCoors($topleft,$bottomright){
+	public static function recommend(){
+    	$arr=[];
+    	for($i=0; $i<25; $i++){
+    		if($i%2){
+				$arr[] = ['picture' => 'images/tmp_pics/hermitage.jpeg', 'text' =>'Эрмитаж'];
+			}else{
+				$arr[] = ['picture' => 'images/tmp_pics/stisaac.jpeg', 'text' =>'Исаакиевскиий собор'];
+			}
+		}
+    	return $arr;
+	}
+		public static function filterByCoors($topleft,$bottomright){
 		return static::find()
 			->select('brand_name_en,category_id,latitude,longitude')
 			->where(['>=', 'latitude', $bottomright[1]])

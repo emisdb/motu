@@ -98,8 +98,9 @@ class SiteController extends Controller
 		$center[] = Constants::get('center.latitude');
 		Yii::$app->view->title= 'MOTU frontend';
 		$prov=new Provider();
+		$recommendations =$prov->recommend();
 		$result=$prov->filterByCoors([$center[0]-1.029, $center[1]+1.013],[$center[0]+1.029, $center[1]-1.013]);
-		return $this->render('index', ['center' => $center,'result'=>$result]);
+		return $this->render('index', ['center' => $center,'result'=>$result,'recommendations'=>$recommendations]);
 	}
 
     /**

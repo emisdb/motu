@@ -18,5 +18,6 @@ function map_init() {
         // );
         app.setCenter(center_coors);
         app.setSites(show_points);
+        app.setRecommendations(show_recommend)
     });
 }

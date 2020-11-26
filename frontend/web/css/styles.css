@@ -511,3 +511,32 @@ div.balloon img{
        background: #37C3FF;
     padding:25px 10px 15px;
    }
+#recommend {
+    display: flex;
+    flex-direction: column;
+}
+#recommend .label{
+    /*font-family: Roboto;*/
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: left;
+    color: #0B0B0B;
+    opacity: 0.9;
+}
+#recommend_list{
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    max-height:500px;
+}
+#recommend_list img{
+    width: 300px;
+    border-radius: 20px;
+}
+#recommend_list div{
+    border-radius: 20px;
+    width: 300px;
+    margin:5px 3px;
+}

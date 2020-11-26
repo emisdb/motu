@@ -82,6 +82,16 @@ AppAsset::register($this);
 			<?=Html::a('<img src="images/icons/museum.svg" />Знакомство с городом','#',['id'=>'sight','class'=>'sidebar_cat_button']); ?>
 			<?=Html::a('<img src="images/icons/crown.svg" />Планы на вечер','#',['id'=>'night','class'=>'sidebar_cat_button']); ?>
         </div>
+        <div id="recommend">
+            <div class="sidebar_row">
+                <div class="label">Рекомендации</div>
+                <div id="recommend_number" class="label"></div>
+            </div>
+            <div class="sidebar_row">
+                <div id="recommend_list"></div>
+            </div>
+
+        </div>
     </div>
 	<?php $this->endBody() ?>
     </body>

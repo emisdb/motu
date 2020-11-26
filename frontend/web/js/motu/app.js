@@ -85,7 +85,20 @@ class App {
         this.map.geoObjects.add(myPlacemarkWithContent);
 
     }
-        setSites(sites){
+    setRecommendations(recs) {
+        this.recommendsations = recs;
+        let res=document.querySelector("#recommend_list");
+        let num=document.querySelector("#recommend_number");
+        var list = "";
+
+         for (var i = 0; i < this.recommendsations.length; i++) {
+            list += "<div><img src='" +  this.recommendsations[i].picture + "' /></div>";
+        }
+        res.innerHTML = list;
+        num.innerHTML = --i;
+    }
+
+     setSites(sites){
         this.sites =sites;
         for (var i=0; i<this.sites.length; i++) {
             const label = this.sites[i].brand_name_en.slice(0,2);
