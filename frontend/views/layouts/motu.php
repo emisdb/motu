@@ -59,12 +59,29 @@ AppAsset::register($this);
         </div>
         <div id="tc_whether"></div>
     </div>
-    <div id="sidebar" class="sidebar_motu map_notes slideInLeft">
-		<?=Html::a('<img src="images/icons/motu_title_logo.svg" />',['real']); ?>
-		<?=Html::a('<img src="images/icons/motu_logo.svg" />
-        <img src="images/icons/motu_title.svg" />',['index']); ?>
-
-        <div style="width:100px;background-color: #0a73bb;align-self: center;vertical-align: center;"></div>
+    <div id="sidebar" class="sidebar_motu_open map_notes slideInLeftOpen">
+        <div class="sidebar_row sidebar_row_line">
+            <div id="sidebar_1_1">
+				<?=Html::a('<img src="images/icons/motu_logo_new.svg" />',['real']); ?>
+            </div>
+            <div id="sidebar_1_2">
+				<?=Html::a('<img src="images/icons/arrow_left.svg" />','#'); ?>
+            </div>
+        </div>
+        <div class="sidebar_row">
+            <div class="input_container">
+                <input type="text" id="input" value>
+                <img src="images/icons/search.svg" class="input_img">
+            </div>
+        </div>
+        <div class="sidebar_row">
+			<?=Html::a('<img src="images/icons/cafe.svg" />Поесть','#',['id'=>'eat','class'=>'sidebar_cat_button']); ?>
+			<?=Html::a('<img src="images/icons/bag.svg" />Покупки','#',['id'=>'buy','class'=>'sidebar_cat_button']); ?>
+        </div>
+        <div class="sidebar_row sidebar_row_line">
+			<?=Html::a('<img src="images/icons/museum.svg" />Знакомство с городом','#',['id'=>'sight','class'=>'sidebar_cat_button']); ?>
+			<?=Html::a('<img src="images/icons/crown.svg" />Планы на вечер','#',['id'=>'night','class'=>'sidebar_cat_button']); ?>
+        </div>
     </div>
 	<?php $this->endBody() ?>
     </body>
