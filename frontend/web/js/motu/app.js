@@ -6,8 +6,9 @@ class App {
         this.map = new ymaps.Map(this.map_container, {
 //            center: [30.25, 59.943],
             center: center_coors,
-            zoom: 15,
-            controls: ['smallMapDefaultSet']
+            zoom: 14,
+            controls: ['smallMapDefaultSet'],
+            behaviors: ['default', 'scrollZoom'],
         });
         this.map.controls.add('zoomControl', {right: '5px', bottom: '50px'});
     }
@@ -103,39 +104,55 @@ class App {
         for (var i=0; i<this.sites.length; i++) {
             const label = this.sites[i].brand_name_en.slice(0,2);
             const name = this.baloon_content(i);
+//            var mark_color = 'twirl#darkblueIcon';
             var mark_color = 'twirl#darkblueIcon';
+
             switch (this.sites[i].category_id) {
                 case '1':
-                    mark_color = 'twirl#darkblueIcon';
+//                    mark_color = 'twirl#darkblueIcon';
+                    mark_color = [[57, 12],[81, 36]];
                     break;
                 case '2':
-                    mark_color = 'twirl#darkgreenIcon';
+ //                   mark_color = 'twirl#darkgreenIcon';
+                    mark_color = [[147, 12],[171, 36]];
                     break;
                 case '3':
-                    mark_color = 'twirl#darkorangeIcon';
+//                    mark_color = 'twirl#darkorangeIcon';
+                    mark_color = [[102, 12],[126, 36]];
                     break;
                 case '4':
-                    mark_color = 'twirl#yellowIcon';
+//                    mark_color = 'twirl#yellowIcon';
+                    mark_color = [[192, 12],[216, 36]];
                     break;
                 case '5':
-                    mark_color = 'twirl#greyIcon';
+//                    mark_color = 'twirl#greyIcon';
+                    mark_color = [[102, 12],[126, 36]];
                     break;
             }
             let plm =new ymaps.Placemark(
                 [this.sites[i].longitude ,this.sites[i].latitude],
                 {
                     balloonContent: name,
-                    iconContent: label,
+//                    iconContent: label,
                 },
                 {
-                    preset: mark_color,
+                    iconImageHref: '../../images/GeoPins.png',
+                    iconImageOffset:[-15, -20],
+                    // Размеры изображения иконки
+                    iconImageSize: [24, 24],
+                    //                   iconImageClipRect:[[124, 364],[140, 378]],
+                    iconImageClipRect: mark_color,
+//                    iconContent: ix,
+                    balloonContentSize: [100, 100],
+                    balloonShadow: true,
+//                   preset: mark_color,
                     inx: i,
             });
             plm.events.add('balloonopen', function (e) {
-                let res=document.querySelector("#visited div:last-child");
+ //               let res=document.querySelector("#visited div:last-child");
                 var target = e.get('target');
                 let inx = target.options.get('inx');
-                res.innerHTML = this.sites[inx].name;
+//                res.innerHTML = this.sites[inx].name;
             }.bind(this));
             this.sites[i].mark =plm;
             this.map.geoObjects.add(plm);

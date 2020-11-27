@@ -50,14 +50,21 @@ AppAsset::register($this);
  			<?= $content ?>
     <div id="title_center" class="map_notes">
         <div id="tc_title">
+            <img src="images/icons/pin.svg" />
             Санкт - Петербург
         </div>
-        <div id="tc_whether"></div>
+        <div id="tc_whether">
+            <img src="images/icons/weather.svg" />
+            +3&#8451;
+        </div>
     </div>
     <div id="title_right" class="map_notes">
-        <div id="tc_title">
-        </div>
-        <div id="tc_whether"></div>
+        <img src="images/icons/route.svg" />
+        <img src="images/icons/compass.svg" />
+        <img src="images/icons/state.svg" />
+    </div>
+    <div id="title_face" class="map_notes">
+        <img src="images/vitya.png" style="width:45px;" />
     </div>
     <div id="sidebar" class="sidebar_motu_open map_notes slideInLeftOpen">
         <div class="sidebar_row sidebar_row_line">
@@ -71,8 +78,8 @@ AppAsset::register($this);
         <div class="sidebar_row">
             <div class="input_container">
                 <input type="text" id="input" value>
-                <img src="images/icons/search.svg" class="input_img">
-            </div>
+				<?=Html::a('<img src="images/icons/search.svg" />','#',['class'=>'input_img']); ?>
+             </div>
         </div>
         <div class="sidebar_row">
 			<?=Html::a('<img src="images/icons/cafe.svg" />Поесть','#',['id'=>'eat','class'=>'sidebar_cat_button']); ?>
@@ -82,12 +89,12 @@ AppAsset::register($this);
 			<?=Html::a('<img src="images/icons/museum.svg" />Знакомство с городом','#',['id'=>'sight','class'=>'sidebar_cat_button']); ?>
 			<?=Html::a('<img src="images/icons/crown.svg" />Планы на вечер','#',['id'=>'night','class'=>'sidebar_cat_button']); ?>
         </div>
-        <div id="recommend">
+        <div id="recommend" class="recommend">
             <div class="sidebar_row">
                 <div class="label">Рекомендации</div>
                 <div id="recommend_number" class="label"></div>
             </div>
-            <div class="sidebar_row">
+            <div class="sidebar_row recommend" >
                 <div id="recommend_list"></div>
             </div>
 

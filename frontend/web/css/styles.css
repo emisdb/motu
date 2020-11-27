@@ -359,20 +359,40 @@ div.balloon img{
     height: 50px;
     left: 40%;
     top: 34px;
+    display: flex;
 }
 #title_right{
     position: absolute;
     width: 158px;
     height: 50px;
-    right: 10%;
+    right: 7%;
     top: 34px;
+    display: flex;
+    justify-content: space-around;
 }
+#title_face{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 3%;
+    top: 34px;
+
+    /*background: url(../images/vitya.jpg);*/
+    padding: 2px;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.16));
+    border-radius: 27px;
+ }
 #tc_title{
     position: relative;
     padding: 15px;
     width: 75%;
     height:100%;
     border-right: 2px solid #F3F5F8;
+}
+#tc_whether{
+    padding-top: 15px;
 }
 .map_notes{
     background: #FFFFFF;
@@ -497,6 +517,9 @@ div.balloon img{
 .sidebar_cat_button img{
     margin-right: 8px;
 }
+.sidebar_cat_button:hover{
+    opacity: .5;
+}
 #eat{
     background: #FBBC04;
 }
@@ -529,7 +552,12 @@ div.balloon img{
     overflow: auto;
     display: flex;
     flex-direction: column;
-    max-height:500px;
+    max-height:100%;
+    position: absolute;
+    top: 0;
+    bottom: 10px;
+    right: 0;
+    left: 0;
 }
 #recommend_list img{
     width: 300px;
@@ -539,4 +567,8 @@ div.balloon img{
     border-radius: 20px;
     width: 300px;
     margin:5px 3px;
+}
+.recommend{
+    position: relative;
+    height: 100%;
 }
