@@ -82,12 +82,12 @@ AppAsset::register($this);
              </div>
         </div>
         <div class="sidebar_row">
-			<?=Html::a('<img src="images/icons/cafe.svg" />Поесть','#',['id'=>'eat','class'=>'sidebar_cat_button']); ?>
-			<?=Html::a('<img src="images/icons/bag.svg" />Покупки','#',['id'=>'buy','class'=>'sidebar_cat_button']); ?>
+			<?=Html::a('<img src="images/icons/cafe.svg" />Поесть','#',['id'=>'eat','class'=>'sidebar_cat_button','onclick' => 'app.setVisible([1])']); ?>
+			<?=Html::a('<img src="images/icons/bag.svg" />Покупки','#',['id'=>'buy','class'=>'sidebar_cat_button','onclick' => 'app.setVisible([3])']); ?>
         </div>
         <div class="sidebar_row sidebar_row_line">
-			<?=Html::a('<img src="images/icons/museum.svg" />Знакомство с городом','#',['id'=>'sight','class'=>'sidebar_cat_button']); ?>
-			<?=Html::a('<img src="images/icons/crown.svg" />Планы на вечер','#',['id'=>'night','class'=>'sidebar_cat_button']); ?>
+			<?=Html::a('<img src="images/icons/museum.svg" />Знакомство с городом','#',['id'=>'sight','class'=>'sidebar_cat_button','onclick' => 'app.setVisible([2,5])']); ?>
+			<?=Html::a('<img src="images/icons/crown.svg" />Планы на вечер','#',['id'=>'night','class'=>'sidebar_cat_button','onclick' => 'app.setVisible([4])']); ?>
         </div>
         <div id="recommend" class="recommend">
             <div class="sidebar_row">

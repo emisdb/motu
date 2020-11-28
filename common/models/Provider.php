@@ -117,7 +117,7 @@ class Provider extends \yii\db\ActiveRecord
 	}
 		public static function filterByCoors($topleft,$bottomright){
 		return static::find()
-			->select('brand_name_en,category_id,latitude,longitude')
+			->select('id,brand_name_en,category_id,latitude,longitude,address,discount,average_price,rating')
 			->where(['>=', 'latitude', $bottomright[1]])
 			->andWhere(['<=', 'latitude', $topleft[1]])
 			->andWhere(['>=', 'longitude', $topleft[0]])

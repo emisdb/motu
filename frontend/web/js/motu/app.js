@@ -55,10 +55,14 @@ class App {
     }
     baloon_content(i){
         var content = '<div class="baloon">';
-        content += "<h2>" + this.sites[i].brand_name_en + "</h2>";
-        content += '<div style="height:80px; border: solid 1px;">IMAGE</div>';
-        content += '<div><a onclick="app.pt_details('+ i +')" href="#">Details</a></div>';
-        content += '<div><a onclick="app.pt_select('+ i +')" href="#">Select</a></div>';
+        content +=      "<div><img src='../../images/tmp_pics/hrc_logo.png' alt='IMAGE' /></div>";
+        content +=      "<div ><div class='baloon_text'><div>" + this.sites[i].brand_name_en + "</div>";
+        content +=          "<div class='baloon_green'></div><div>" + this.sites[i].rating + "</div></div>";
+        content +=          "<div class='baloon_text'><div class='baloon_note'>" + this.sites[i].address + "</div></div>";
+        content +=          "<div class='baloon_text'><div class='baloon_note'>Средняя цена:</div><div>" + this.sites[i].average_price + "&#8381</div></div>";
+        content +=          "<div><a onclick='app.pt_details(" + i + ") href='#'>Подробнее</a></div></div>";
+        content += "<div><div class='baloon_percent'>" + this.sites[i].discount + "%</div>";
+        content += '<div><a onclick="app.pt_select('+ i +')" href="#"><img src="./../images/icons/route.svg" /></a></div></div>';
         return content += '</div>';
     }
     setCenter(center){
@@ -98,8 +102,19 @@ class App {
         res.innerHTML = list;
         num.innerHTML = --i;
     }
-
-     setSites(sites){
+    setVisible(ids){
+        for (var ii = 0; ii < this.sites.length; ii++) {
+            for (var i=0; i<ids.length; i++) {
+               let plm = this.sites[ii].mark;
+                if (this.sites[ii].category_id == ids[i]) {
+                    plm.options.set("visible", true);
+                }else{
+                    plm.options.set("visible", false);
+                }
+            }
+        }
+    }
+    setSites(sites){
         this.sites =sites;
         for (var i=0; i<this.sites.length; i++) {
             const label = this.sites[i].brand_name_en.slice(0,2);
@@ -114,19 +129,19 @@ class App {
                     break;
                 case '2':
  //                   mark_color = 'twirl#darkgreenIcon';
-                    mark_color = [[147, 12],[171, 36]];
+                    mark_color = [[149, 12],[173, 36]];
                     break;
                 case '3':
 //                    mark_color = 'twirl#darkorangeIcon';
-                    mark_color = [[102, 12],[126, 36]];
+                    mark_color = [[103, 12],[127, 36]];
                     break;
                 case '4':
 //                    mark_color = 'twirl#yellowIcon';
-                    mark_color = [[192, 12],[216, 36]];
+                    mark_color = [[195, 12],[219, 36]];
                     break;
                 case '5':
 //                    mark_color = 'twirl#greyIcon';
-                    mark_color = [[102, 12],[126, 36]];
+                    mark_color = [[149, 12],[173, 36]];
                     break;
             }
             let plm =new ymaps.Placemark(
@@ -154,6 +169,7 @@ class App {
                 let inx = target.options.get('inx');
 //                res.innerHTML = this.sites[inx].name;
             }.bind(this));
+            plm.options.set("visible", false);
             this.sites[i].mark =plm;
             this.map.geoObjects.add(plm);
         }
