@@ -13,6 +13,7 @@ use common\models\LoginForm;
 use common\models\Constants;
 use common\models\Providers;
 use common\models\Provider;
+use common\models\FilterProvidert;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -97,10 +98,11 @@ class SiteController extends Controller
 		$center[] = Constants::get('center.longitude');
 		$center[] = Constants::get('center.latitude');
 		Yii::$app->view->title= 'MOTU frontend';
+		$filters = FilterProvidert::find()->joinWith(['filter f'],false)->select(['f.category_id','provider_id','filter_id','f.title'])->asArray()->all();
 		$prov=new Provider();
 		$recommendations =$prov->recommend();
 		$result=$prov->filterByCoors([$center[0]-1.029, $center[1]+1.013],[$center[0]+1.029, $center[1]-1.013]);
-		return $this->render('index', ['center' => $center,'result'=>$result,'recommendations'=>$recommendations]);
+		return $this->render('index', ['center' => $center,'result'=>$result,'recommendations'=>$recommendations,'filters'=>$filters]);
 	}
 
     /**

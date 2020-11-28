@@ -90,6 +90,30 @@ class App {
         this.map.geoObjects.add(myPlacemarkWithContent);
 
     }
+    setControl(step){
+        switch(step){
+            case 0:
+                let reso=document.querySelector("#control_area");
+                reso.innerHTML=this.control;
+                let slogoo=document.querySelector("#sidebar_logo");
+                slogoo.style.display='block';
+                let sbacko=document.querySelector("#sidebar_back");
+                sbacko.style.display='none';
+                this.setInisible();
+                this.currentCategory=[];
+                break;
+            case 1:
+                let res=document.querySelector("#control_area");
+                this.control=res.innerHTML;
+                res.innerHTML=this.getFilters();
+                let slogo=document.querySelector("#sidebar_logo");
+                slogo.style.display='none';
+                let sback=document.querySelector("#sidebar_back");
+                sback.style.display='block';
+                break;
+
+        }
+    }
     setRecommendations(recs) {
         this.recommendsations = recs;
         let res=document.querySelector("#recommend_list");
@@ -105,7 +129,7 @@ class App {
     setVisible(ids){
         for (var ii = 0; ii < this.sites.length; ii++) {
             for (var i=0; i<ids.length; i++) {
-               let plm = this.sites[ii].mark;
+                let plm = this.sites[ii].mark;
                 if (this.sites[ii].category_id == ids[i]) {
                     plm.options.set("visible", true);
                 }else{
@@ -113,12 +137,59 @@ class App {
                 }
             }
         }
+        this.currentCategory=ids;
+        this.setControl(1);
+    }
+    setInisible(){
+        for (var ii = 0; ii < this.sites.length; ii++) {
+            let plm = this.sites[ii].mark;
+            plm.options.set("visible", false);
+        }
+     }
+    getFilters(){
+        var content="<div class='filter_container'>";
+        var ii=0;
+  //      for (var i=0; i<this.filters.length; i++) {
+        for (var key0 in this.filters) {
+            if(this.currentCategory.indexOf(parseInt(key0))>=0){
+                for (var key1 in this.filters[key0]) {
+                    if(this.filters[key0][key1][1]>0) {
+                        content += "<a class='filter' href='#' onclick='app.setFilter(' + key1 + ')'>" + this.filters[key0][key1][0] + " " + this.filters[key0][key1][1] + "</a>";
+                        ii++;
+                    }
+                }
+            }
+        }
+        return content +"</div>";
+
+    }
+    arrangeFilters(filters){
+        this.filters=[];
+
+        for (var i=0; i<filters.length; i++) {
+            var num =0;
+            if(filters[i].category_id in this.filters) {
+                if(filters[i].filter_id in this.filters[filters[i].category_id]) {
+                    num=this.filters[filters[i].category_id][filters[i].filter_id][1]+1;
+                }
+                    this.filters[filters[i].category_id][filters[i].filter_id]=[filters[i].title,num ];
+
+            } else{
+                this.filters[filters[i].category_id]=[];
+                this.filters[filters[i].category_id][filters[i].filter_id]=[filters[i].title,num ];
+            }
+             this.providers[filters[i].provider_id][1].push(filters[i].filter_id);
+        }
+
     }
     setSites(sites){
         this.sites =sites;
+        this.providers =[];
         for (var i=0; i<this.sites.length; i++) {
             const label = this.sites[i].brand_name_en.slice(0,2);
             const name = this.baloon_content(i);
+            this.providers[this.sites[i].id]=[i,[]];
+
 //            var mark_color = 'twirl#darkblueIcon';
             var mark_color = 'twirl#darkblueIcon';
 

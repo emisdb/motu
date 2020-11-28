@@ -68,8 +68,12 @@ AppAsset::register($this);
     </div>
     <div id="sidebar" class="sidebar_motu_open map_notes slideInLeftOpen">
         <div class="sidebar_row sidebar_row_line">
-            <div id="sidebar_1_1">
+            <div id="sidebar_logo">
 				<?=Html::a('<img src="images/icons/motu_logo_new.svg" />',['real']); ?>
+            </div>
+            <div id="sidebar_back">
+				<?=Html::a('<img src="images/icons/back.svg" />','#',['onclick'=>'app.setControl(0)']); ?>
+                Назад
             </div>
             <div id="sidebar_1_2">
 				<?=Html::a('<img src="images/icons/arrow_left.svg" />','#'); ?>
@@ -81,13 +85,15 @@ AppAsset::register($this);
 				<?=Html::a('<img src="images/icons/search.svg" />','#',['class'=>'input_img']); ?>
              </div>
         </div>
-        <div class="sidebar_row">
-			<?=Html::a('<img src="images/icons/cafe.svg" />Поесть','#',['id'=>'eat','class'=>'sidebar_cat_button','onclick' => 'app.setVisible([1])']); ?>
-			<?=Html::a('<img src="images/icons/bag.svg" />Покупки','#',['id'=>'buy','class'=>'sidebar_cat_button','onclick' => 'app.setVisible([3])']); ?>
-        </div>
-        <div class="sidebar_row sidebar_row_line">
-			<?=Html::a('<img src="images/icons/museum.svg" />Знакомство с городом','#',['id'=>'sight','class'=>'sidebar_cat_button','onclick' => 'app.setVisible([2,5])']); ?>
-			<?=Html::a('<img src="images/icons/crown.svg" />Планы на вечер','#',['id'=>'night','class'=>'sidebar_cat_button','onclick' => 'app.setVisible([4])']); ?>
+        <div id="control_area">
+            <div class="sidebar_row">
+                <?=Html::a('<img src="images/icons/cafe.svg" />Поесть','#',['id'=>'eat','class'=>'sidebar_cat_button','onclick' => 'app.setVisible([1])']); ?>
+                <?=Html::a('<img src="images/icons/bag.svg" />Покупки','#',['id'=>'buy','class'=>'sidebar_cat_button','onclick' => 'app.setVisible([3])']); ?>
+            </div>
+            <div class="sidebar_row sidebar_row_line">
+                <?=Html::a('<img src="images/icons/museum.svg" />Знакомство с городом','#',['id'=>'sight','class'=>'sidebar_cat_button','onclick' => 'app.setVisible([2,5])']); ?>
+                <?=Html::a('<img src="images/icons/crown.svg" />Планы на вечер','#',['id'=>'night','class'=>'sidebar_cat_button','onclick' => 'app.setVisible([4])']); ?>
+            </div>
         </div>
         <div id="recommend" class="recommend">
             <div class="sidebar_row">
