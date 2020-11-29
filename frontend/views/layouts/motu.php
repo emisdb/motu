@@ -59,8 +59,15 @@ AppAsset::register($this);
         </div>
     </div>
     <div id="title_right" class="map_notes">
-        <img src="images/icons/route.svg" />
-        <img src="images/icons/compass.svg" />
+        <div id="selected_bage" class="notification">
+            <img src="images/icons/route.svg" />
+            <span class="badge red" >0</span>
+        </div>
+        <div id="recommend_bage" class="notification">
+            <img src="images/icons/compass.svg" />
+            <span class="badge" >24</span>
+        </div>
+
         <img src="images/icons/state.svg" />
     </div>
     <div id="title_face" class="map_notes">
@@ -79,31 +86,32 @@ AppAsset::register($this);
 				<?=Html::a('<img src="images/icons/arrow_left.svg" />','#'); ?>
             </div>
         </div>
-        <div class="sidebar_row">
-            <div class="input_container">
-                <input type="text" id="input" value>
-				<?=Html::a('<img src="images/icons/search.svg" />','#',['class'=>'input_img']); ?>
+        <div id="display_area">
+            <div class="sidebar_row">
+               <div class="input_container">
+                    <input type="text" id="input" value>
+                    <?=Html::a('<img src="images/icons/search.svg" />','#',['class'=>'input_img']); ?>
+                 </div>
+            </div>
+            <div id="control_area">
+                <div class="sidebar_row">
+                    <?=Html::a('<img src="images/icons/cafe.svg" />Поесть','#',['id'=>'eat','class'=>'sidebar_cat_button','onclick' => 'app.setCategory([1])']); ?>
+                    <?=Html::a('<img src="images/icons/bag.svg" />Покупки','#',['id'=>'buy','class'=>'sidebar_cat_button','onclick' => 'app.setCategory([3])']); ?>
+                </div>
+                <div class="sidebar_row sidebar_row_line">
+                    <?=Html::a('<img src="images/icons/museum.svg" />Знакомство с городом','#',['id'=>'sight','class'=>'sidebar_cat_button','onclick' => 'app.setCategory([2,5])']); ?>
+                    <?=Html::a('<img src="images/icons/crown.svg" />Планы на вечер','#',['id'=>'night','class'=>'sidebar_cat_button','onclick' => 'app.setCategory([4])']); ?>
+                </div>
+            </div>
+            <div id="recommend" class="recommend">
+                <div class="sidebar_row">
+                    <div class="label">Рекомендации</div>
+                    <div id="recommend_number" class="label"></div>
+                </div>
+                <div class="sidebar_row recommend" >
+                    <div id="recommend_list"></div>
+                </div>
              </div>
-        </div>
-        <div id="control_area">
-            <div class="sidebar_row">
-                <?=Html::a('<img src="images/icons/cafe.svg" />Поесть','#',['id'=>'eat','class'=>'sidebar_cat_button','onclick' => 'app.setCategory([1])']); ?>
-                <?=Html::a('<img src="images/icons/bag.svg" />Покупки','#',['id'=>'buy','class'=>'sidebar_cat_button','onclick' => 'app.setCategory([3])']); ?>
-            </div>
-            <div class="sidebar_row sidebar_row_line">
-                <?=Html::a('<img src="images/icons/museum.svg" />Знакомство с городом','#',['id'=>'sight','class'=>'sidebar_cat_button','onclick' => 'app.setCategory([2,5])']); ?>
-                <?=Html::a('<img src="images/icons/crown.svg" />Планы на вечер','#',['id'=>'night','class'=>'sidebar_cat_button','onclick' => 'app.setCategory([4])']); ?>
-            </div>
-        </div>
-        <div id="recommend" class="recommend">
-            <div class="sidebar_row">
-                <div class="label">Рекомендации</div>
-                <div id="recommend_number" class="label"></div>
-            </div>
-            <div class="sidebar_row recommend" >
-                <div id="recommend_list"></div>
-            </div>
-
         </div>
     </div>
 	<?php $this->endBody() ?>

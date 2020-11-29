@@ -104,6 +104,25 @@ class Provider extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
+	/**
+	 * Gets query for [[FilterProviders]].
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getFilterProvider()
+	{
+		return $this->hasMany(FilterProvidert::className(), ['provider_id' => 'id']);
+	}
+	/**
+	 * Gets query for [[FilterProviders]].
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getGalleris()
+	{
+		return $this->hasMany(Galleries::className(), ['provider_id' => 'id']);
+	}
+
 	public static function recommend(){
     	$arr=[];
     	for($i=0; $i<25; $i++){
@@ -117,7 +136,9 @@ class Provider extends \yii\db\ActiveRecord
 	}
 		public static function filterByCoors($topleft,$bottomright){
 		return static::find()
-			->select('id,brand_name_en,category_id,latitude,longitude,address,discount,average_price,rating')
+			->select('id,brand_name_en,category_id,latitude,longitude,object_type,
+					address,discount,average_price,rating,from_operation_hour,to_operation_hour,
+					description,phone,web_url')
 			->where(['>=', 'latitude', $bottomright[1]])
 			->andWhere(['<=', 'latitude', $topleft[1]])
 			->andWhere(['>=', 'longitude', $topleft[0]])

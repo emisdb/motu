@@ -100,7 +100,8 @@ class SiteController extends Controller
 		Yii::$app->view->title= 'MOTU frontend';
 		$filters = FilterProvidert::find()->joinWith(['filter f'],false)->select(['f.category_id','provider_id','filter_id','f.title'])->asArray()->all();
 		$prov=new Provider();
-		$recommendations =$prov->recommend();
+		$recommendations = Provider::find()->joinWith(['Galleries g'],false, 'INNER JOIN')->select(['t.id','t.brand_name','g.media_id','g.gallery_name as picture'])->asArray()->all();
+		var_dump($recommendations);exit();
 		$result=$prov->filterByCoors([$center[0]-1.029, $center[1]+1.013],[$center[0]+1.029, $center[1]-1.013]);
 		return $this->render('index', ['center' => $center,'result'=>$result,'recommendations'=>$recommendations,'filters'=>$filters]);
 	}

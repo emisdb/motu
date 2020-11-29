@@ -6,7 +6,11 @@ class App {
         this.filters=[];
         this.currentFilter=[];
         this.currentCategory=[];
+        this.currentPage=0;
         this.control=[];
+        this.docontrol=true;
+        this.tmp=[];
+        this.selected=[]
     }
      setMap(ymaps){
         this.map = new ymaps.Map(this.map_container, {
@@ -56,8 +60,13 @@ class App {
        bar.dispatchEvent(mouseoverEvent);
     }
     pt_select(i){
-        let res=document.querySelector("#selected div:last-child");
-        res.innerHTML = app.sites[i].brand_name_en;
+        this.selected.push(i);
+        let res=document.querySelector("#selected_bage span");
+        res.innerHTML = this.selected.length;
+        let plm=this.sites[i].mark[0];
+        this.sites[i].mark[1] =1;
+        plm.options.set('iconImageClipRect',[[241, 12],[265, 36]]);
+        plm.options.set('visible',true);
     }
     baloon_content(i){
         var content = '<div class="baloon">';
@@ -66,7 +75,7 @@ class App {
         content +=          "<div class='baloon_green'></div><div>" + this.sites[i].rating + "</div></div>";
         content +=          "<div class='baloon_text'><div class='baloon_note'>" + this.sites[i].address + "</div></div>";
         content +=          "<div class='baloon_text'><div class='baloon_note'>Средняя цена:</div><div>" + this.sites[i].average_price + "&#8381</div></div>";
-        content +=          "<div><a onclick='app.pt_details(" + i + ") href='#'>Подробнее</a></div></div>";
+        content +=          "<div><a onclick='app.setPage(" + i + ")' href='#'>Подробнее</a></div></div>";
         content += "<div><div class='baloon_percent'>" + this.sites[i].discount + "%</div>";
         content += '<div><a onclick="app.pt_select('+ i +')" href="#"><img src="./../images/icons/route.svg" /></a></div></div>';
         return content += '</div>';
@@ -99,24 +108,42 @@ class App {
     setControl(step){
         switch(step){
             case 0:
-                let reso=document.querySelector("#control_area");
-                reso.innerHTML=this.control[0];
-                let slogoo=document.querySelector("#sidebar_logo");
-                slogoo.style.display='block';
-                let sbacko=document.querySelector("#sidebar_back");
-                sbacko.style.display='none';
-                this.setInvisible();
-                this.currentCategory=[];
-                this.currentFilter=[];
-                break;
+                if( this.control.length==0) return;
+                let step = this.control.pop();
+                this.docontrol=true;
+                if (step[1]) {
+                    var reso = document.querySelector("#display_area");
+                }
+                else  {
+                    var reso=document.querySelector("#control_area");
+                    let slogoo=document.querySelector("#sidebar_logo");
+                    slogoo.style.display='block';
+                    let sbacko=document.querySelector("#sidebar_back");
+                    sbacko.style.display='none';
+                    this.setInvisible();
+                    this.currentCategory=[];
+                    this.currentFilter=[];
+                }
+                reso.innerHTML=step[0];
+                 break;
             case 1:
                 let res=document.querySelector("#control_area");
-                this.control[0]=res.innerHTML;
+                if(this.docontrol) this.control.push([res.innerHTML,0]);
                 res.innerHTML=this.getFilters();
                 let slogo=document.querySelector("#sidebar_logo");
                 slogo.style.display='none';
                 let sback=document.querySelector("#sidebar_back");
                 sback.style.display='block';
+                break;
+            case 2:
+                let res2=document.querySelector("#display_area");
+                if(this.docontrol)  this.control.push([res2.innerHTML,1]);
+                this.docontrol=false;
+                res2.innerHTML=this.getPage();
+                let slogo2=document.querySelector("#sidebar_logo");
+                slogo2.style.display='none';
+                let sback2=document.querySelector("#sidebar_back");
+                sback2.style.display='block';
                 break;
 
         }
@@ -138,19 +165,25 @@ class App {
         this.setControl(1);
         this.setVisible();
     }
+    setPage(ix){
+        this.currentPage=ix;
+        this.setControl(2);
+        this.setVisible();
+    }
     setVisible(){
 
         var is_not =true;
         for (var ii = 0; ii < this.sites.length; ii++) {
             is_not = true;
             for (var i=0; i<this.currentCategory.length; i++) {
-                let plm = this.sites[ii].mark;
+                let mark = this.sites[ii].mark;
                 if (this.sites[ii].category_id == this.currentCategory[i]) {
-                    plm.options.set("visible", true);
+                    mark[0].options.set("visible", true);
                     is_not=false;
                 }else{
                     if(is_not) {
-                        plm.options.set("visible", false);
+                        if (mark[1]) mark[0].options.set("visible", true);
+                        else mark[0].options.set("visible", false);
                     }
                 }
             }
@@ -158,8 +191,9 @@ class App {
     }
     setInvisible(){
         for (var ii = 0; ii < this.sites.length; ii++) {
-            let plm = this.sites[ii].mark;
-            plm.options.set("visible", false);
+            let mark = this.sites[ii].mark;
+            if (mark[1]) mark[0].options.set("visible", true);
+            else mark[0].options.set("visible", false);
         }
      }
      goFilter() {
@@ -169,14 +203,15 @@ class App {
            for(var fi=0; fi<this.currentFilter.length; fi++){
                var provs = this.ixfilters[this.currentFilter[fi]];
                if (provs.indexOf(this.sites[ii].id) > -1) {
-                let plm = this.sites[ii].mark;
-                plm.options.set("visible", true);
+                let mark = this.sites[ii].mark;
+                mark[0].options.set("visible", true);
                    is_not=false;
             }
             else{
                 if(is_not){
-                    let plm = this.sites[ii].mark;
-                    plm.options.set("visible", false);
+                    let mark = this.sites[ii].mark;
+                    if (mark[1]) mark[0].options.set("visible", true);
+                    else mark[0].options.set("visible", false);
                 }
             }
            }
@@ -197,18 +232,31 @@ class App {
                 this.goFilter();
             }
      }
-    getFilters(){
-        var content="<div class='filter_container'>";
-        var ii=0;
-        for(var cat_id in this.currentCategory){
-            var arr = this.filters[this.currentCategory[cat_id]];
-            for (var fkey in arr){
-                var filter =arr[fkey];
-                if(filter[1]>0) {
-                    content += "<a class='filter' id='filterid_" + fkey + "' href='#' onclick='app.toggleFilter(" + fkey + ")'>" + filter[0] + " " + filter[1] + "</a>";
-                    ii++;
+    getPage() {
+        var content="<div class='page_container'>";
+        content += "<div class='sidebar_row' style='max-width:300px;'><img src='../../images/tmp_pics/hrc.jpeg' alt='IMAGE' /></div>\";\n";
+        content += "<div class='sidebar_row sidebar_title'>" + this.sites[this.currentPage].brand_name_en + "</div>\n";
+        content += "<div class='sidebar_row'>" + this.sites[this.currentPage].address + "</div>\n";
+        content += "<div class='sidebar_row'>" + this.sites[this.currentPage].phone +  " : " + this.sites[this.currentPage].web_url +"</div>\n";
+        content += "<div class='sidebar_row sidebar_row_line'>" + this.sites[this.currentPage].from_operation_hour + " : " + this.sites[this.currentPage].to_operation_hour + "</div>\n";
+        content += "<div class='sidebar_row'>" + this.sites[this.currentPage].discount + " " +this.sites[this.currentPage].rating + "</div>\n";
+        content += "<div class='sidebar_row sidebar_row_line'>" + this.sites[this.currentPage].average_price + "</div>\n";
+        content += "<div class='sidebar_row'>" + this.sites[this.currentPage].description + "</div>\n";
+         return content +"</div>";
+
+    }
+        getFilters(){
+            var content="<div class='filter_container'>";
+            var ii=0;
+            for(var cat_id in this.currentCategory){
+                var arr = this.filters[this.currentCategory[cat_id]];
+                for (var fkey in arr){
+                    var filter =arr[fkey];
+                    if(filter[1]>0) {
+                        content += "<a class='filter' id='filterid_" + fkey + "' href='#' onclick='app.toggleFilter(" + fkey + ")'>" + filter[0] + " " + filter[1] + "</a>";
+                        ii++;
+                    }
                 }
-            }
         }
         return content +"</div>";
     }
@@ -290,7 +338,7 @@ class App {
 //                res.innerHTML = this.sites[inx].name;
             }.bind(this));
             plm.options.set("visible", false);
-            this.sites[i].mark =plm;
+            this.sites[i].mark =[plm,0];
             this.map.geoObjects.add(plm);
         }
 
