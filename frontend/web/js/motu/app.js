@@ -122,13 +122,13 @@ class App {
         }
     }
     setRecommendations(recs) {
-        this.recommendsations = recs;
+        this.recommendations = recs;
         let res=document.querySelector("#recommend_list");
         let num=document.querySelector("#recommend_number");
         var list = "";
 
-         for (var i = 0; i < this.recommendsations.length; i++) {
-            list += "<div><img src='" +  this.recommendsations[i].picture + "' /></div>";
+         for (var i = 0; i < this.recommendations.length; i++) {
+            list += "<div><img src='" +  this.recommendations[i].picture + "' /></div>";
         }
         res.innerHTML = list;
         num.innerHTML = --i;
