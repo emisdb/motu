@@ -520,6 +520,18 @@ div.balloon img{
     padding: 3px 5px;
     margin: 2px;
 }
+.selected_filter{
+    background: #FBBC04;
+    border: 1px solid #FBBC04;
+    box-sizing: border-box;
+    border-radius: 15px;
+     font-style: normal;
+    font-weight: bolder;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    opacity: 0.9;
+}
 .sidebar_cat_button{
     padding: 30px 10px 20px;
     border-radius: 15px;

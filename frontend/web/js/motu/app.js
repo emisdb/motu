@@ -1,6 +1,12 @@
 class App {
     constructor(container) {
         this.map_container = container;
+        this.ixfilters =[];
+        this.ixproviders =[];
+        this.filters=[];
+        this.currentFilter=[];
+        this.currentCategory=[];
+        this.control=[];
     }
      setMap(ymaps){
         this.map = new ymaps.Map(this.map_container, {
@@ -94,17 +100,18 @@ class App {
         switch(step){
             case 0:
                 let reso=document.querySelector("#control_area");
-                reso.innerHTML=this.control;
+                reso.innerHTML=this.control[0];
                 let slogoo=document.querySelector("#sidebar_logo");
                 slogoo.style.display='block';
                 let sbacko=document.querySelector("#sidebar_back");
                 sbacko.style.display='none';
-                this.setInisible();
+                this.setInvisible();
                 this.currentCategory=[];
+                this.currentFilter=[];
                 break;
             case 1:
                 let res=document.querySelector("#control_area");
-                this.control=res.innerHTML;
+                this.control[0]=res.innerHTML;
                 res.innerHTML=this.getFilters();
                 let slogo=document.querySelector("#sidebar_logo");
                 slogo.style.display='none';
@@ -126,48 +133,89 @@ class App {
         res.innerHTML = list;
         num.innerHTML = --i;
     }
-    setVisible(ids){
+    setCategory(ids){
+        this.currentCategory=ids;
+        this.setControl(1);
+        this.setVisible();
+    }
+    setVisible(){
+
+        var is_not =true;
         for (var ii = 0; ii < this.sites.length; ii++) {
-            for (var i=0; i<ids.length; i++) {
+            is_not = true;
+            for (var i=0; i<this.currentCategory.length; i++) {
                 let plm = this.sites[ii].mark;
-                if (this.sites[ii].category_id == ids[i]) {
+                if (this.sites[ii].category_id == this.currentCategory[i]) {
                     plm.options.set("visible", true);
+                    is_not=false;
                 }else{
-                    plm.options.set("visible", false);
+                    if(is_not) {
+                        plm.options.set("visible", false);
+                    }
                 }
             }
         }
-        this.currentCategory=ids;
-        this.setControl(1);
     }
-    setInisible(){
+    setInvisible(){
         for (var ii = 0; ii < this.sites.length; ii++) {
             let plm = this.sites[ii].mark;
             plm.options.set("visible", false);
         }
      }
+     goFilter() {
+         var is_not=true;
+       for (var ii = 0; ii < this.sites.length; ii++) {
+           is_not=true;
+           for(var fi=0; fi<this.currentFilter.length; fi++){
+               var provs = this.ixfilters[this.currentFilter[fi]];
+               if (provs.indexOf(this.sites[ii].id) > -1) {
+                let plm = this.sites[ii].mark;
+                plm.options.set("visible", true);
+                   is_not=false;
+            }
+            else{
+                if(is_not){
+                    let plm = this.sites[ii].mark;
+                    plm.options.set("visible", false);
+                }
+            }
+           }
+        }
+    }
+        toggleFilter(id) {
+            let element = document.querySelector("#filterid_" + id);
+            element.classList.toggle("selected_filter");
+            var ix = this.currentFilter.indexOf(id);
+         if ( ix < 0) {
+             this.currentFilter.push(id);
+         }else{
+             this.currentFilter.splice(ix, 1);
+         }
+            if(this.currentFilter.length==0) {
+                this.setVisible(this.currentCategory);
+            } else {
+                this.goFilter();
+            }
+     }
     getFilters(){
         var content="<div class='filter_container'>";
         var ii=0;
-  //      for (var i=0; i<this.filters.length; i++) {
-        for (var key0 in this.filters) {
-            if(this.currentCategory.indexOf(parseInt(key0))>=0){
-                for (var key1 in this.filters[key0]) {
-                    if(this.filters[key0][key1][1]>0) {
-                        content += "<a class='filter' href='#' onclick='app.setFilter(' + key1 + ')'>" + this.filters[key0][key1][0] + " " + this.filters[key0][key1][1] + "</a>";
-                        ii++;
-                    }
+        for(var cat_id in this.currentCategory){
+            var arr = this.filters[this.currentCategory[cat_id]];
+            for (var fkey in arr){
+                var filter =arr[fkey];
+                if(filter[1]>0) {
+                    content += "<a class='filter' id='filterid_" + fkey + "' href='#' onclick='app.toggleFilter(" + fkey + ")'>" + filter[0] + " " + filter[1] + "</a>";
+                    ii++;
                 }
             }
         }
         return content +"</div>";
-
     }
     arrangeFilters(filters){
-        this.filters=[];
 
         for (var i=0; i<filters.length; i++) {
-            var num =0;
+            var num =1;
             if(filters[i].category_id in this.filters) {
                 if(filters[i].filter_id in this.filters[filters[i].category_id]) {
                     num=this.filters[filters[i].category_id][filters[i].filter_id][1]+1;
@@ -178,17 +226,18 @@ class App {
                 this.filters[filters[i].category_id]=[];
                 this.filters[filters[i].category_id][filters[i].filter_id]=[filters[i].title,num ];
             }
-             this.providers[filters[i].provider_id][1].push(filters[i].filter_id);
+            if(!(filters[i].filter_id in this.ixfilters)) this.ixfilters[filters[i].filter_id] = [];
+            this.ixfilters[filters[i].filter_id].push(filters[i].provider_id);
+            this.ixproviders[filters[i].provider_id][1].push(filters[i].filter_id);
         }
 
     }
     setSites(sites){
         this.sites =sites;
-        this.providers =[];
         for (var i=0; i<this.sites.length; i++) {
             const label = this.sites[i].brand_name_en.slice(0,2);
             const name = this.baloon_content(i);
-            this.providers[this.sites[i].id]=[i,[]];
+            this.ixproviders[this.sites[i].id]=[i,[]];
 
 //            var mark_color = 'twirl#darkblueIcon';
             var mark_color = 'twirl#darkblueIcon';
