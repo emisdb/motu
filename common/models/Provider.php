@@ -118,9 +118,14 @@ class Provider extends \yii\db\ActiveRecord
 	 *
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getGalleris()
+	public function getGalleries()
 	{
 		return $this->hasMany(Galleries::className(), ['provider_id' => 'id']);
+	}
+	public function getMediafiles()
+	{
+		return $this->hasMany(Mediafiles::className(), ['id' => 'media_id'])
+			->viaTable('galleries', ['provider_id' => 'id']);
 	}
 
 	public static function recommend(){
