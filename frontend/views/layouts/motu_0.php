@@ -70,7 +70,7 @@ AppAsset::register($this);
                 <div>Categories</div>
             </div>
         </div>
-        <h2><a href="#" id="myBtn" style="text-align: center;">ПЛАТФОРМА #MOTU</a></h2>
+        <h2><a href="#" id="myBtn" >ПЛАТФОРМА #MOTU</a></h2>
    </div>
     <div class="footer_motu fadeInUp">
         <!-- Flickity HTML init -->
