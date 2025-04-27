@@ -1,4 +1,4 @@
-
+document.addEventListener('DOMContentLoaded', function(){
     // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -36,5 +36,5 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-document.addEventListener('DOMContentLoaded', function(){
+
 });
