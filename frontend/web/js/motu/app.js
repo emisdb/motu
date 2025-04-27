@@ -153,7 +153,7 @@ class App {
         let res=document.querySelector("#recommend_list");
         let num=document.querySelector("#recommend_number");
         var list = "";
-        if(!this.recommendations) {
+        if(this.recommendations != null) {
             for (var i = 0; i < this.recommendations.length; i++) {
                 list += "<div><img src='" +  this.recommendations[i].picture + "' /></div>";
             }
