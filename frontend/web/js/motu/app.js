@@ -262,6 +262,7 @@ class App {
         return content +"</div>";
     }
     arrangeFilters(filters){
+        if (filters == null) return;
 
         for (var i=0; i<filters.length; i++) {
             var num =1;
@@ -283,6 +284,7 @@ class App {
     }
     setSites(sites){
         this.sites =sites;
+        if (this.sites == null) return;
         for (var i=0; i<this.sites.length; i++) {
             const label = this.sites[i].brand_name_en.slice(0,2);
             const name = this.baloon_content(i);
