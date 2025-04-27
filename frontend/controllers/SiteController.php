@@ -102,7 +102,7 @@ class SiteController extends Controller
 		$prov=new Provider();
 		$recommendations = Provider::find()->from(Provider::tableName().' t')->joinWith(['mediafiles m'],false, 'INNER JOIN')
 			->select(['t.id','brand_name','m.path as path','m.filename as picture'])->asArray()->all();
-		var_dump($recommendations);exit();
+	//	var_dump($recommendations);exit();
 		$result=$prov->filterByCoors([$center[0]-1.029, $center[1]+1.013],[$center[0]+1.029, $center[1]-1.013]);
 		return $this->render('index', ['center' => $center,'result'=>$result,'recommendations'=>$recommendations,'filters'=>$filters]);
 	}
