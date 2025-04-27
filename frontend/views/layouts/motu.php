@@ -113,7 +113,7 @@ AppAsset::register($this);
                 </div>
              </div>
         </div>
-        <h2><a href="#" id="myBtn" >ПЛАТФОРМА #MOTU</a></h2>
+        <h6><a href="#" id="myBtn" >ПЛАТФОРМА #MOTU</a></h6>
     </div>
 	<?php $this->endBody() ?>
     </body>
